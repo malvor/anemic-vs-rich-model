@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    php:
+        container_name: ${COMPOSE_PROJECT_NAME}_php
+        build:
+            context: .
+            target: app_php
+        environment:
+            - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+        volumes:
+            - ./code/:/app:rw,cached
+            - ./code/public:/app/public:rw,delegated
+            - ./code/var/cache:/app/var/cache:cached
+            - ./code/var/log:/app/var/log:cached
